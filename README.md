@@ -43,3 +43,44 @@ nvm --version
 ```sh
 npm -v
 ```
+
+```sh
+cd /home/ec2-user
+```
+
+```sh
+git clone https://github.com/jhaker/nodejs-aws-codedeploy-pipeline.git
+```
+
+cd nodejs-aws-codedeploy-pipeline
+npm i
+node app.js # test http://34.238.151.122:3000/
+npm install -g pm2
+
+
+### set node, pm2 and npm available to root user
+sudo ln -s "$(which node)" /sbin/node 
+
+sudo ln -s "$(which npm)" /sbin/npm 
+
+sudo ln -s "$(which pm2)" /sbin/pm2  
+
+
+### starting th eapp as sudo(run nodejs in the background and when the server starts)
+sudo pm2 start app.js --name=nodejs-express-app 
+
+sudo pm2 save # saves the running process, if not saved, pm2 will forget the running apps on next boot 
+
+### impotant if you want pm2 to start on system boot 
+sudo pm2 startup # starts pm2 on computer boot 
+
+
+### install aws code deploy agent
+sudo yum install -y ruby
+
+
+wget https://bucket-name.s3.region-identifier.amazonaws.com/latest/install
+
+
+
+
